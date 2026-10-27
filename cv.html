@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="es" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Currículum | Fabián Cedeño</title>
+  <meta name="description" content="Hoja de vida de Fabián Cedeño, estudiante de Ingeniería en Ciencias de la Computación.">
+  <meta name="theme-color" content="#070b14">
+
+  <!-- Mismo tema que el portafolio (se comparte por localStorage) -->
+  <script>
+    try {
+      var t = localStorage.getItem("fc-tema");
+      if (t === "light" || t === "dark") document.documentElement.setAttribute("data-theme", t);
+    } catch (e) { /* almacenamiento no disponible: se usa el tema oscuro */ }
+  </script>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Poppins:wght@500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/styles.css">
+  <link rel="stylesheet" href="css/cv.css">
+</head>
+<body class="cv-page">
+  <!-- Barra de acciones (no se imprime) -->
+  <header class="cv-toolbar">
+    <div class="cv-toolbar__inner">
+      <a href="index.html" class="btn btn--ghost btn--sm">← Volver al portafolio</a>
+      <div class="cv-toolbar__actions">
+        <a href="assets/cv/CV-Fabian-Cedeno.pdf" download class="btn btn--primary btn--sm" id="btn-descargar">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3v12M7 10l5 5 5-5M5 21h14"/></svg>
+          Descargar PDF
+        </a>
+        <button type="button" class="btn btn--ghost btn--sm" id="btn-imprimir">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9V2h12v7M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg>
+          Imprimir
+        </button>
+        <button class="icon-btn theme-toggle" type="button" aria-label="Cambiar a modo claro">
+          <svg class="icon-sun" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>
+          <svg class="icon-moon" viewBox="0 0 24 24" aria-hidden="true"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Hoja de vida (se construye desde data.js) -->
+  <main class="cv-sheet" id="cv">
+    <header class="cv-header">
+      <div class="cv-header__photo" id="cv-foto"></div>
+      <div>
+        <h1 class="cv-header__name" id="cv-nombre"></h1>
+        <p class="cv-header__title" id="cv-titulo"></p>
+        <ul class="cv-header__contact" id="cv-contacto"></ul>
+      </div>
+    </header>
+
+    <div class="cv-body">
+      <div class="cv-main">
+        <section class="cv-section" aria-labelledby="cv-t-sobre">
+          <h2 id="cv-t-sobre">Sobre mí</h2>
+          <p id="cv-sobre"></p>
+        </section>
+        <section class="cv-section" aria-labelledby="cv-t-exp">
+          <h2 id="cv-t-exp">Experiencia</h2>
+          <div id="cv-experiencia"></div>
+        </section>
+        <section class="cv-section" aria-labelledby="cv-t-edu">
+          <h2 id="cv-t-edu">Educación</h2>
+          <div id="cv-educacion"></div>
+        </section>
+        <section class="cv-section" aria-labelledby="cv-t-cert">
+          <h2 id="cv-t-cert">Certificados</h2>
+          <ul class="cv-certs" id="cv-certificados"></ul>
+        </section>
+      </div>
+
+      <aside class="cv-side">
+        <section class="cv-section" aria-labelledby="cv-t-tec">
+          <h2 id="cv-t-tec">Habilidades técnicas</h2>
+          <div id="cv-tecnicas"></div>
+        </section>
+        <section class="cv-section" aria-labelledby="cv-t-bla">
+          <h2 id="cv-t-bla">Habilidades blandas</h2>
+          <ul class="cv-list" id="cv-blandas"></ul>
+        </section>
+        <section class="cv-section" aria-labelledby="cv-t-idi">
+          <h2 id="cv-t-idi">Idiomas</h2>
+          <ul class="cv-list" id="cv-idiomas"></ul>
+        </section>
+      </aside>
+    </div>
+
+    <p class="cv-footer">Referencias disponibles bajo solicitud.</p>
+  </main>
+
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+  <script src="js/data.js"></script>
+  <script src="js/cv.js"></script>
+</body>
+</html>

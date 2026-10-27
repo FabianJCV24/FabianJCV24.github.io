@@ -1,0 +1,120 @@
+/* ==========================================================================
+   cv.css — Hoja de vida web (cv.html)
+   Usa las variables de tema definidas en styles.css.
+   ========================================================================== */
+
+.cv-page {
+  background:
+    radial-gradient(ellipse at 80% 0%, rgba(59, 130, 255, 0.12), transparent 55%),
+    var(--bg);
+  min-height: 100vh;
+}
+
+/* ---------- Barra de acciones ---------- */
+.cv-toolbar {
+  position: sticky; top: 0; z-index: 50; background: var(--nav-bg);
+  backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); border-bottom: 1px solid var(--border);
+}
+.cv-toolbar__inner {
+  width: min(900px, 100% - 32px); margin-inline: auto; padding: 12px 0;
+  display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 10px;
+}
+.cv-toolbar__actions { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; }
+
+/* ---------- "Hoja" del documento ---------- */
+.cv-sheet {
+  width: min(900px, 100% - 32px); margin: 32px auto 56px; padding: 48px;
+  background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius);
+  box-shadow: var(--shadow);
+}
+
+.cv-header {
+  display: grid; grid-template-columns: auto 1fr; align-items: center; gap: 28px;
+  padding-bottom: 28px; margin-bottom: 28px; border-bottom: 2px solid var(--border);
+}
+.cv-header__photo {
+  width: 120px; height: 120px; border-radius: 50%; overflow: hidden; padding: 3px; background: var(--grad);
+}
+.cv-header__photo img, .cv-header__photo .photo-fallback {
+  width: 100%; height: 100%; border-radius: 50%; object-fit: cover; border: 3px solid var(--surface);
+}
+.cv-header__photo .photo-fallback { font-size: 2.4rem; }
+.cv-header__name { font-size: clamp(1.8rem, 4vw, 2.4rem); }
+.cv-header__title { margin: 4px 0 12px; color: var(--accent-text); font-weight: 600; }
+.cv-header__contact { display: flex; flex-wrap: wrap; gap: 6px 20px; font-size: 0.92rem; }
+.cv-header__contact a { color: var(--text); text-decoration: none; overflow-wrap: anywhere; }
+.cv-header__contact a:hover { color: var(--accent-text); text-decoration: underline; }
+.cv-header__contact span { color: var(--muted); margin-right: 6px; }
+
+.cv-body { display: grid; grid-template-columns: 1.7fr 1fr; gap: 40px; }
+.cv-section { margin-bottom: 28px; }
+.cv-section h2 {
+  font-size: 0.95rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--accent-text);
+  padding-bottom: 8px; margin-bottom: 14px; border-bottom: 1px solid var(--border);
+}
+.cv-section p { margin: 0; color: var(--text); }
+
+.cv-item { margin-bottom: 18px; break-inside: avoid; }
+.cv-item__head { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 2px 12px; }
+.cv-item h3 { font-size: 1.02rem; }
+.cv-item__date { font-size: 0.85rem; color: var(--muted); white-space: nowrap; }
+.cv-item__org { margin: 2px 0 6px !important; color: var(--muted) !important; font-size: 0.92rem; }
+.cv-item ul { list-style: disc; padding-left: 20px; font-size: 0.93rem; }
+.cv-item li { margin-bottom: 3px; }
+
+.cv-group { margin-bottom: 14px; break-inside: avoid; }
+.cv-group h3 { font-size: 0.92rem; margin-bottom: 4px; }
+.cv-group p { font-size: 0.9rem; color: var(--muted) !important; }
+
+.cv-list { display: grid; gap: 6px; font-size: 0.93rem; }
+.cv-list li { position: relative; padding-left: 16px; }
+.cv-list li::before {
+  content: ""; position: absolute; left: 0; top: 0.6em; width: 6px; height: 6px; border-radius: 50%; background: var(--accent-2);
+}
+.cv-list strong { font-weight: 600; }
+
+.cv-certs { display: grid; gap: 12px; }
+.cv-certs li { break-inside: avoid; }
+.cv-certs strong { display: block; font-size: 0.95rem; font-weight: 600; }
+.cv-certs span { font-size: 0.87rem; color: var(--muted); }
+
+.cv-footer {
+  margin: 12px 0 0; padding-top: 18px; border-top: 1px solid var(--border);
+  text-align: center; font-style: italic; color: var(--muted);
+}
+
+/* ---------- Responsive ---------- */
+@media (max-width: 720px) {
+  .cv-sheet { padding: 28px 20px; margin-top: 20px; }
+  .cv-header { grid-template-columns: 1fr; justify-items: center; text-align: center; gap: 16px; }
+  .cv-header__contact { justify-content: center; }
+  .cv-body { grid-template-columns: 1fr; gap: 8px; }
+  .cv-toolbar__inner { justify-content: center; }
+}
+
+/* ---------- Impresión: fondo blanco, sin botones, A4 ---------- */
+@page { size: A4; margin: 14mm 14mm 16mm; }
+
+@media print {
+  :root, :root[data-theme="dark"], :root[data-theme="light"] {
+    --bg: #fff; --surface: #fff; --surface-2: #fff; --text: #111; --muted: #444;
+    --accent-text: #1650c4; --accent-2: #1d5fe0; --border: #cfd6e3;
+    --grad: linear-gradient(120deg, #1d5fe0, #0895b3);
+    color-scheme: light;
+  }
+  * { animation: none !important; transition: none !important; box-shadow: none !important; }
+  html, body, .cv-page { background: #fff !important; color: #111; }
+  body { font-size: 10.5pt; line-height: 1.45; }
+  .cv-toolbar, .toast { display: none !important; }
+  .cv-sheet { width: auto; margin: 0; padding: 0; border: 0; border-radius: 0; }
+  .cv-header { padding-bottom: 14px; margin-bottom: 16px; gap: 20px; grid-template-columns: auto 1fr; text-align: left; justify-items: start; }
+  .cv-header__photo { width: 90px; height: 90px; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  .cv-header__name { font-size: 22pt; }
+  .cv-header__contact { justify-content: flex-start; }
+  .cv-body { grid-template-columns: 1.7fr 1fr; gap: 24px; }
+  .cv-section { margin-bottom: 14px; }
+  .cv-section h2 { font-size: 10pt; margin-bottom: 8px; padding-bottom: 4px; break-after: avoid; }
+  .cv-item { margin-bottom: 10px; }
+  .cv-list li::before { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  a { color: inherit !important; text-decoration: none !important; }
+}
